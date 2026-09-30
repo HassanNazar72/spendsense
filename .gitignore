@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Secrets
+.env
+
+# Generated reports and personal data
+output/
+data/learned_rules.json
+
+# Private notes (not published)
+docs/

@@ -1,0 +1,17 @@
+{
+  "_comment": "Keyword -> category. If the keyword appears as a whole word in the bank description, the rule matches. First match wins.",
+  "RENT": "Rent",
+  "STUDENT FINANCE": "Income",
+  "TESCO": "Groceries",
+  "SAINSBURYS": "Groceries",
+  "ALDI": "Groceries",
+  "LIDL": "Groceries",
+  "TFL": "Transport",
+  "UBER": "Transport",
+  "NETFLIX": "Subscriptions",
+  "SPOTIFY": "Subscriptions",
+  "THREE MOBILE": "Bills",
+  "OCTOPUS ENERGY": "Bills",
+  "AMAZON": "Shopping",
+  "PRET A MANGER": "Eating Out"
+}

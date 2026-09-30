@@ -1,0 +1,75 @@
+# Copyright (c) 2026 Hassan Nazar. Licensed under the MIT License (see LICENSE).
+"""Create a fake two-month bank statement with the kind of mess real exports have.
+
+Run:  python data/make_sample.py
+Everything is fictional. Real statements should never be committed to git.
+"""
+
+import csv
+from pathlib import Path
+
+OUT = Path(__file__).parent / "sample_statement.csv"
+
+# (date, description, amount) - negative = money out, positive = money in
+ROWS = [
+    # ---- August 2026 ----
+    ("01/08/2026", "RENT - FLAT 4 STRATFORD", "-850.00"),
+    ("01/08/2026", "STUDENT FINANCE ENGLAND", "£1,200.00"),
+    ("02/08/2026", "TESCO STORES 3021 LONDON", "-23.45"),
+    ("03/08/2026", "TFL TRAVEL CH", "-8.10"),
+    ("04/08/2026", "PRET A MANGER 0412", "-6.85"),
+    ("05/08/2026", "NETFLIX.COM", "-10.99"),
+    ("05/08/2026", "SPOTIFY UK", "-11.99"),
+    ("06/08/2026", "PUREGYM LTD", "-24.99"),
+    ("08/08/2026", "SAINSBURYS S/MKT 0877", "-31.20"),
+    ("09/08/2026", "UBER *TRIP HELP.UBER.COM", "-14.30"),
+    ("10/08/2026", "WAGAMAMA STRATFORD", "-18.50"),
+    ("12/08/2026", "THREE MOBILE", "-15.00"),
+    ("14/08/2026", "AMAZON MKTP UK*2R4", "-29.99"),
+    ("15/08/2026", "BOOTS 1123", "-7.49"),
+    ("16/08/2026", "TESCO STORES 3021 LONDON", "-41.10"),
+    ("18/08/2026", "TFL TRAVEL CH", "-12.40"),
+    ("20/08/2026", "CAFFE NERO 551", "-3.95"),
+    ("22/08/2026", "ODEON CINEMAS", "-12.50"),
+    ("25/08/2026", "OCTOPUS ENERGY", "-45.00"),
+    ("28/08/2026", "ALDI 118", "-19.80"),
+    ("30/08/2026", "LIDL GB LONDON", "-12.35"),
+    ("", "", ""),                                        # blank line some banks add
+    # ---- September 2026 ----
+    ("01/09/2026", "RENT - FLAT 4 STRATFORD", "-850.00"),
+    ("01/09/2026", "STUDENT FINANCE ENGLAND", "£1,200.00"),
+    ("02/09/2026", "TESCO STORES 3021 LONDON", "-27.80"),
+    ("03/09/2026", "TFL TRAVEL CH", "-9.60"),
+    ("05/09/2026", "NETFLIX.COM", "-10.99"),
+    ("05/09/2026", "SPOTIFY UK", "-11.99"),
+    ("06/09/2026", "PUREGYM LTD", "-24.99"),
+    ("07/09/2026", "RYANAIR DAC STN-BFS", "-64.98"),     # flight to Belfast
+    ("08/09/2026", "TRAINLINE.COM", "-22.40"),
+    ("09/09/2026", "AMAZON MKTP UK*7K1", "-54.99"),
+    ("09/09/2026", "AMAZON MKTP UK*7K1", "-54.99"),     # duplicate charge
+    ("10/09/2026", "PRET A MANGER 0412", "-7.20"),
+    ("12/09/2026", "THREE MOBILE", "-15.00"),
+    ("13/09/2026", "WATERSTONES 204", "-16.99"),
+    ("14/09/2026", "SAINSBURYS S/MKT 0877", "-28.65"),
+    ("15/09/2026", "DELIVEROO", "-21.30"),
+    ("17/09/2026", "CURRYS PC WORLD", "-189.00"),       # large one-off
+    ("18/09/2026", "UBER *TRIP HELP.UBER.COM", "-11.75"),
+    ("20/09/2026", "CHATGPT SUBSCRIPTION", "-20.00"),
+    ("21/09/2026", "31/09/2026 PAYMENT", "abc"),        # corrupt row
+    ("22/09/2026", "OCTOPUS ENERGY", "-45.00"),
+    ("25/09/2026", "UEL PRINT CREDIT", "-5.00"),
+    ("27/09/2026", "LIDL GB LONDON", "-15.10"),
+    ("32/09/2026", "TESCO STORES 3021 LONDON", "-9.99"),  # impossible date
+]
+
+
+def main() -> None:
+    with OUT.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Date", "Description", "Amount"])
+        writer.writerows(ROWS)
+    print(f"Wrote {len(ROWS)} rows to {OUT}")
+
+
+if __name__ == "__main__":
+    main()
